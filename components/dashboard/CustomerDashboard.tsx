@@ -1,4 +1,3 @@
-// components/CustomerDashboard.tsx
 "use client";
 
 import { useEffect, useState } from "react";

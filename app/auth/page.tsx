@@ -8,7 +8,7 @@ export default function AuthPage() {
   const isRegistering = mode === "register";
 
   return (
-    <section className="flex min-h-screen justify-center bg-primary-50 px-5 pb-16 pt-32 lg:px-10 lg:pt-40">
+    <section className="flex min-h-screen justify-center bg-[linear-gradient(to_top,#cfbeea,#f9fafb_80%)] px-5 pb-26 pt-24 lg:px-10 lg:pt-32">
       <div className="grid w-full max-w-400 items-center gap-10 lg:grid-cols-[1fr_520px]">
         <div className="max-w-2xl">
           <p className="text-one-liner-medium text-secondary">Welcome to Reisen</p>

@@ -413,7 +413,7 @@ export default function AdminDashboard() {
         <div className="w-full max-w-240 mx-auto flex flex-col gap-8">
 
           {/* Header */}
-          <div className="fade-in-up flex items-center gap-2">
+          <div className="fade-in-up flex items-center  mt-4 gap-2">
             <div>
               <div className="flex items-center gap-1.5 text-secondary text-small-medium mb-1">
                 <ShieldCheck size={14} />

@@ -1,8 +1,9 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { destinationsApi } from "@/lib/api-client";
 import { Search, SlidersHorizontal, MapPin } from "lucide-react";
-import type { Destination, ExperienceCategory } from "@/lib/types/reisen";
 import {
   Select,
   SelectContent,
@@ -15,6 +16,7 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import type { Destination, ExperienceCategory } from "@/lib/types/reisen";
 
 export type DestinationFilterState = {
   search: string;
@@ -41,23 +43,56 @@ const CATEGORY_OPTIONS = (
 const PILL =
   "flex items-center gap-2 filter-border bg-transparent px-4 py-2.5 text-small text-body-dark";
 
-type Props = {
-  filters: DestinationFilterState;
-  onChange: (next: Partial<DestinationFilterState>) => void;
-  destinations: Destination[];
-  currentSlug: string;
-  currentName: string;
-};
-
 export default function DestinationFilters({
   filters,
   onChange,
-  destinations,
   currentSlug,
   currentName,
-}: Props) {
+}: {
+  filters: DestinationFilterState;
+  onChange: (next: Partial<DestinationFilterState>) => void;
+  currentSlug: string;
+  currentName: string;
+}) {
   const router = useRouter();
+  const [status, setStatus] = useState<{
+    hasError: boolean;
+    errorMessage: string;
+    isLoading: boolean;
+  }>({ hasError: false, errorMessage: "", isLoading: false });
+  const [destinations, setDestinations] = useState<Destination[]>([]);
+
   const { search, minPrice, maxPrice, categories } = filters;
+
+  useEffect(() => {
+    async function getDestinations() {
+      setStatus({
+        hasError: false,
+        errorMessage: "",
+        isLoading: true,
+      });
+
+      try {
+        const destinations = await destinationsApi.list({ limit: 50 });
+        setDestinations(() => destinations.items);
+      } catch (error: unknown) {
+        setStatus({
+          hasError: true,
+          errorMessage:
+            error instanceof Error
+              ? error.message
+              : "Something went wrong, try again.",
+          isLoading: false,
+        });
+      } finally {
+        setStatus((prev) => ({
+          ...prev,
+          isLoading: false,
+        }));
+      }
+    }
+    getDestinations();
+  }, []);
 
   function toggleCategory(value: ExperienceCategory) {
     onChange({
@@ -124,10 +159,10 @@ export default function DestinationFilters({
       >
         <SelectTrigger
           aria-label="Destination"
-          className={`${PILL} w-full justify-start rounded-2xl border-body-dark/20 text-[length:var(--small-font-size)] data-[size=default]:h-auto lg:order-4 lg:w-auto [&>svg]:shrink-0 [&>svg]:text-secondary`}
+          className={`${PILL} w-full justify-start rounded-2xl border-body-dark/20 text-(length:--small-font-size) data-[size=default]:h-auto lg:order-4 lg:w-auto [&>svg]:shrink-0 [&>svg]:text-secondary`}
         >
           <MapPin size={20} />
-          <span className="max-w-32 truncate text-dark-base">
+          <span className="max-w-32 truncate text-dark-base text-small">
             {currentName || "Destination"}
           </span>
         </SelectTrigger>
@@ -137,7 +172,11 @@ export default function DestinationFilters({
           sideOffset={8}
           className="min-w-56 rounded-2xl border border-body-off bg-white-base p-2 ring-0 shadow-[0px_0px_20px_#7f5ccc55]"
         >
-          {destinations.length === 0 ? (
+          {status.hasError ? (
+            <div className="px-3 py-2 text-small text-error">
+              {status.errorMessage}
+            </div>
+          ) : destinations.length === 0 ? (
             <div className="px-3 py-2 text-small text-body-dark">
               No destinations available.
             </div>
@@ -169,7 +208,7 @@ export default function DestinationFilters({
           className={`${PILL} w-full justify-start rounded-2xl border-body-dark/20 outline-none lg:order-5 lg:w-auto`}
         >
           <SlidersHorizontal size={20} className="shrink-0 text-secondary" />
-          <span className="text-dark-base">{categoryLabel}</span>
+          <span className="text-dark-base text-small">{categoryLabel}</span>
         </DropdownMenuTrigger>
         <DropdownMenuContent
           align="end"
@@ -182,7 +221,7 @@ export default function DestinationFilters({
             checked={categories.length === 0}
             onCheckedChange={() => onChange({ categories: [] })}
             onSelect={(event) => event.preventDefault()}
-            className="rounded-xl py-2 pr-8 pl-3 text-small text-dark-base focus:bg-primary-50"
+            className="rounded-xl py-2 pr-8 pl-3 text-dark-base focus:bg-primary-50"
           >
             All
           </DropdownMenuCheckboxItem>
@@ -192,7 +231,7 @@ export default function DestinationFilters({
               checked={categories.includes(value)}
               onCheckedChange={() => toggleCategory(value)}
               onSelect={(event) => event.preventDefault()}
-              className="rounded-xl py-2 pr-8 pl-3 text-small text-dark-base focus:bg-primary-50"
+              className="rounded-xl py-2 pr-8 pl-3 text-dark-base focus:bg-primary-50"
             >
               {label}
             </DropdownMenuCheckboxItem>

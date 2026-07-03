@@ -111,124 +111,126 @@ export default function AiRecommendationForm({ slug }: { slug: string }) {
     : "Experiences in this destination";
 
   return (
-    <div className="flex min-h-screen flex-col justify-between items-center gap-6 bg-white-base p-5 lg:gap-8 lg:p-10">
-      {/* DESTINATION IMAGE WITH HEADING & QUIT BUTTON */}
-      <div className="relative h-106.5 w-full overflow-hidden rounded-[28px] bg-dark-base">
-        {destination?.imageUrl ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={destination?.imageUrl}
-            alt={destination ? destination.name : ""}
-            className="h-full w-full object-cover bg-center"
-          />
-        ) : (
-          <div className="h-full w-full object-cover bg-primary-50 animate-pulse" />
-        )}
+    <div className="flex place-content-center">
+      <div className="w-full max-w-400 flex min-h-screen flex-col justify-between items-center gap-6 bg-white-base p-5 lg:gap-8 lg:p-10">
+        {/* DESTINATION IMAGE WITH HEADING & QUIT BUTTON */}
+        <div className="relative h-106.5 w-full overflow-hidden rounded-[28px] bg-dark-base">
+          {destination?.imageUrl ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={destination?.imageUrl}
+              alt={destination ? destination.name : ""}
+              className="h-full w-full object-cover bg-center"
+            />
+          ) : (
+            <div className="h-full w-full object-cover bg-primary-50 animate-pulse" />
+          )}
 
-        <div className="absolute inset-0 bg-black/40" />
+          <div className="absolute inset-0 bg-black/40" />
 
-        <button
-          type="button"
-          onClick={leaveToResults}
-          aria-label="Quit"
-          className="absolute right-4 top-4 z-10 text-white-base transition-colors hover:text-secondary cursor-pointer"
-        >
-          <Power size={32} />
-        </button>
+          <button
+            type="button"
+            onClick={leaveToResults}
+            aria-label="Quit"
+            className="absolute right-4 top-4 z-10 text-white-base transition-colors hover:text-secondary cursor-pointer"
+          >
+            <Power size={32} />
+          </button>
 
-        <h1 className="absolute bottom-6 left-6 z-10 max-w-[80%] text-section-title text-white-base lg:bottom-8 lg:left-8">
-          {destinationLabel}
-        </h1>
-      </div>
-
-      {/* STATUS SECTION */}
-      <div aria-live="polite" className="min-h-12">
-        {status === "generating" && (
-          <div className="flex flex-col items-center gap-5 max-w-100 rounded-2xl bg-primary-50 p-4 border border-primary">
-            <p className="text-body-regular text-body-dark">
-              Matching experiences to your description…
-            </p>
-            <Sparkles size={40} className="text-secondary animate-ping" />
-          </div>
-        )}
-
-        {status === "success" && (
-          <div className="flex flex-col items-center gap-5 max-w-100 rounded-2xl bg-success/20 p-4 border border-success">
-            <p className="text-body-regular text-success">
-              Found your picks, taking you there…
-            </p>
-            <PartyPopper size={40} className="text-success" />
-          </div>
-        )}
-
-        {status === "no-matches" && (
-          <div className="flex flex-col items-center gap-5 rounded-2xl bg-info/20 p-4 border border-info max-w-100 text-center">
-            <p className="text-body-regular text-body-dark">
-              Couldn&apos;t find experiences that match that description. Try
-              mentioning different interests, a vibe, or the pace you want.
-            </p>
-            <Info size={40} className="mt-0.5 shrink-0 text-info" />
-          </div>
-        )}
-
-        {status === "error" && error && (
-          <div className="flex items-start gap-3 rounded-2xl border border-error/30 bg-error/5 p-4">
-            <AlertTriangle size={18} className="mt-0.5 shrink-0 text-error" />
-            <p className="text-body-regular text-body-dark">
-              {error.message}
-              {error.retryable && " You can try again."}
-            </p>
-          </div>
-        )}
-      </div>
-
-      {/* PROMPT INPUT */}
-      <form onSubmit={handleSubmit} className="w-full max-w-187.5 h-fit">
-        <div className="card-shadow-primary-glow box-border flex items-end gap-2 min-h-15 p-2 pl-4 rounded-3xl border border-primary/50 bg-white-base transition-colors focus-within:border-primary overflow-hidden">
-          <textarea
-            value={prompt}
-            onChange={(event) => {
-              setPrompt(event.target.value.slice(0, MAX_PROMPT));
-              if (status === "no-matches" || status === "error")
-                setStatus("idle");
-              if (error) setError(null);
-            }}
-            onKeyDown={(event) => {
-              if (event.key === "Enter" && !event.shiftKey) {
-                event.preventDefault();
-                void handleSubmit();
-              }
-            }}
-            placeholder={PLACEHOLDER}
-            rows={1}
-            maxLength={MAX_PROMPT}
-            autoFocus
-            className="block self-center w-full pl-4 resize-none field-sizing-content max-h-[4lh] overflow-y-auto bg-transparent text-body-regular text-dark-base outline-none placeholder:text-body-dark/60"
-          />
-
-          <div className="flex items-center gap-2">
-            <span className="text-extra-small text-body-dark">
-              {trimmed.length}/{MAX_PROMPT}
-            </span>
-            <button
-              type="submit"
-              disabled={!canSubmit}
-              aria-label={
-                status === "error" ? "Try again" : "Get my recommendations"
-              }
-              className="primary-cta pointer-events-auto h-11 w-fit flex-none cursor-pointer disabled:cursor-not-allowed disabled:opacity-60"
-            >
-              <span className="primary-cta-inner flex h-full w-full items-center justify-center  text-dark-base">
-                {status === "generating" ? (
-                  <Loader2 size={28} className="animate-spin" />
-                ) : (
-                  <Send size={28} />
-                )}
-              </span>
-            </button>
-          </div>
+          <h1 className="absolute bottom-6 left-6 z-10 max-w-[80%] text-section-title text-white-base lg:bottom-8 lg:left-8">
+            {destinationLabel}
+          </h1>
         </div>
-      </form>
+
+        {/* STATUS SECTION */}
+        <div aria-live="polite" className="min-h-12">
+          {status === "generating" && (
+            <div className="flex flex-col items-center gap-5 max-w-100 rounded-2xl bg-primary-50 p-4 border border-primary">
+              <p className="text-body-regular text-body-dark">
+                Matching experiences to your description…
+              </p>
+              <Sparkles size={40} className="text-secondary animate-ping" />
+            </div>
+          )}
+
+          {status === "success" && (
+            <div className="flex flex-col items-center gap-5 max-w-100 rounded-2xl bg-success/20 p-4 border border-success">
+              <p className="text-body-regular text-success">
+                Found your picks, taking you there…
+              </p>
+              <PartyPopper size={40} className="text-success" />
+            </div>
+          )}
+
+          {status === "no-matches" && (
+            <div className="flex flex-col items-center gap-5 rounded-2xl bg-info/20 p-4 border border-info max-w-100 text-center">
+              <p className="text-body-regular text-body-dark">
+                Couldn&apos;t find experiences that match that description. Try
+                mentioning different interests, a vibe, or the pace you want.
+              </p>
+              <Info size={40} className="mt-0.5 shrink-0 text-info" />
+            </div>
+          )}
+
+          {status === "error" && error && (
+            <div className="flex items-start gap-3 rounded-2xl border border-error/30 bg-error/5 p-4">
+              <AlertTriangle size={18} className="mt-0.5 shrink-0 text-error" />
+              <p className="text-body-regular text-body-dark">
+                {error.message}
+                {error.retryable && " You can try again."}
+              </p>
+            </div>
+          )}
+        </div>
+
+        {/* PROMPT INPUT */}
+        <form onSubmit={handleSubmit} className="w-full max-w-187.5 h-fit">
+          <div className="card-shadow-primary-glow box-border flex items-end gap-2 min-h-15 p-2 pl-4 rounded-3xl border border-primary/50 bg-white-base transition-colors focus-within:border-primary overflow-hidden">
+            <textarea
+              value={prompt}
+              onChange={(event) => {
+                setPrompt(event.target.value.slice(0, MAX_PROMPT));
+                if (status === "no-matches" || status === "error")
+                  setStatus("idle");
+                if (error) setError(null);
+              }}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" && !event.shiftKey) {
+                  event.preventDefault();
+                  void handleSubmit();
+                }
+              }}
+              placeholder={PLACEHOLDER}
+              rows={1}
+              maxLength={MAX_PROMPT}
+              autoFocus
+              className="block self-center w-full pl-4 resize-none field-sizing-content max-h-[4lh] overflow-y-auto bg-transparent text-body-regular text-dark-base outline-none placeholder:text-body-dark/60"
+            />
+
+            <div className="flex items-center gap-2">
+              <span className="text-extra-small text-body-dark">
+                {trimmed.length}/{MAX_PROMPT}
+              </span>
+              <button
+                type="submit"
+                disabled={!canSubmit}
+                aria-label={
+                  status === "error" ? "Try again" : "Get my recommendations"
+                }
+                className="primary-cta pointer-events-auto h-11 w-fit flex-none cursor-pointer disabled:cursor-not-allowed disabled:opacity-60"
+              >
+                <span className="primary-cta-inner flex h-full w-full items-center justify-center  text-dark-base">
+                  {status === "generating" ? (
+                    <Loader2 size={28} className="animate-spin" />
+                  ) : (
+                    <Send size={28} />
+                  )}
+                </span>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

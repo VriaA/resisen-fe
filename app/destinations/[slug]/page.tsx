@@ -1,4 +1,4 @@
-import DestinationResults from "@/components/destinations/destinationResults";
+import DestinationResults from "@/components/destinations/destinationResults/destinationResults";
 
 export default async function DestinationResultsPage({
   params,

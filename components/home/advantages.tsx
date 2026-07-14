@@ -4,9 +4,9 @@ const advantages: Readonly<
   Array<{ heading: string; description: string; image: string }>
 > = [
   {
-    heading: "Local tour guides on demand",
+    heading: "Plan your trips with ease",
     description:
-      "Think of it as a guide on speed dial, so you can explore like you've got a friend in town. One that lives in the area and knows where there are no long lines.",
+      "With access to destinations all over the world and an AI recommendation system, an experience of a lifetime is just a few clicks away.",
     image: "/trip_plan_advantage.svg",
   },
   {

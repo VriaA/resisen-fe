@@ -9,6 +9,7 @@ import HeaderAuthActions from "./headerAuthActions";
 export default function Header() {
   const router = useRouter();
   const pathname = usePathname();
+  const HEADER_POSITION = pathname === "/" ? "absolute" : "static";
   const { isLoggedIn, logout } = useAuthSession();
 
   function handleLogout() {
@@ -19,7 +20,9 @@ export default function Header() {
   if (pathname?.startsWith("/ai-recommendations")) return null;
 
   return (
-    <header className="absolute top-0 left-0 z-50 w-full flex justify-center">
+    <header
+      className={`${HEADER_POSITION} top-0 left-0 z-50 w-full flex justify-center`}
+    >
       <div className="p-5 lg:p-10 lg:py-5 w-full max-w-400">
         <nav className="flex items-center justify-between gap-4">
           <Link href="/">

@@ -46,7 +46,7 @@ export default function DestinationResults({ slug }: { slug: string }) {
 
   return (
     <div className="flex place-content-center bg-[linear-gradient(to_top,#cfbeea,#f9fafb_80%)]">
-      <section className="section-wrapper items-start justify-center gap-5 pt-20 lg:gap-10 min-h-screen">
+      <section className="section-wrapper items-start justify-center gap-5 lg:gap-10 min-h-screen pt-0">
         {status.hasError ? (
           <ErrorMessage errorMessage={status.errorMessage} />
         ) : (

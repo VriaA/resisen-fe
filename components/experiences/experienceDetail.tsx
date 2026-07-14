@@ -114,8 +114,8 @@ function BookingModal({
             Booking Requested!
           </h3>
           <p className="text-body-regular text-body-dark">
-            Your booking request has been sent to the provider. You'll be
-            notified once it's confirmed.
+            Your booking request has been sent to the provider. You&apos;ll be
+            notified once it&apos;s confirmed.
           </p>
         </div>
       </div>
@@ -203,7 +203,7 @@ function BookingModal({
               )}
             </p>
             <button type="submit" disabled={submitting} className="primary-cta">
-              <span className="primary-cta-inner !py-2.5 !px-6 text-dark-base">
+              <span className="primary-cta-inner py-2.5 px-6 text-dark-base">
                 {submitting ? "Submitting..." : "Confirm request"}
               </span>
             </button>
@@ -280,8 +280,8 @@ export default function ExperienceDetail({
 
   return (
     <>
-      <section className="flex justify-center pt-2.5 lg:pt-5 ">
-        <div className="section-wrapper items-start! bg-white-base pb-0">
+      <section className="flex justify-center">
+        <div className="section-wrapper items-start! bg-white-base pb-0 pt-0">
           <button
             type="button"
             onClick={() => router.back()}

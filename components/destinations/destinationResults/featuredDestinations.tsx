@@ -1,15 +1,17 @@
 "use client";
 
+import { useContext, useEffect, useState } from "react";
 import { useDestinationModal } from "@/components/home/destinationExperienceModal";
 import { destinationsApi } from "@/lib/api-client";
 import { Destination } from "@/lib/types/reisen";
-import { useEffect, useState } from "react";
 import DestinationCard from "../destinationCard";
 import InfoMessage from "./infoMessage";
 import ErrorMessage from "./errorMessage";
 import LoadingSkeleton from "./loadingSkeleton";
+import { destinationContext } from "@/lib/contexts/DestinationContext";
+import type { DestinationContext } from "@/lib/contexts/DestinationContext";
 
-export default function FeaturedDestinations({ slug }: { slug: string }) {
+export default function FeaturedDestinations() {
   const { open, modal } = useDestinationModal();
   const [featuredDestinations, setFeaturedDestinations] = useState<
     Destination[] | null
@@ -19,6 +21,8 @@ export default function FeaturedDestinations({ slug }: { slug: string }) {
     errorMessage: string;
     isLoading: boolean;
   }>({ hasError: false, errorMessage: "", isLoading: false });
+
+  const { slug } = useContext(destinationContext) as DestinationContext;
 
   useEffect(() => {
     async function getDestinations() {

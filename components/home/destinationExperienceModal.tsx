@@ -26,7 +26,7 @@ export default function DestinationExperienceModal({
   }, []);
 
   const aiPath = `/ai-recommendations?destination=${encodeURIComponent(slug)}`;
-  const resultsPath = `/destinations/${slug}`;
+  const resultsPath = `/experiences/destination/${slug}`;
 
   function handleYes() {
     if (getStoredToken()) {

@@ -1,5 +1,5 @@
 import DestinationResults from "@/components/destinations/destinationResults/destinationResults";
-
+import DestinationContextProvider from "@/lib/contexts/DestinationContext";
 export default async function DestinationResultsPage({
   params,
 }: {
@@ -7,5 +7,9 @@ export default async function DestinationResultsPage({
 }) {
   const { slug } = await params;
 
-  return <DestinationResults slug={slug} />;
+  return (
+    <DestinationContextProvider slug={slug}>
+      <DestinationResults />
+    </DestinationContextProvider>
+  );
 }

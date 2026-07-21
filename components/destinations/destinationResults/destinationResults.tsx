@@ -1,5 +1,6 @@
 "use client";
-import { useEffect, useState } from "react";
+
+import { useEffect, useState, useContext } from "react";
 import { destinationsApi } from "@/lib/api-client";
 import AiRecommendations from "./aiRecommendations";
 import FeaturedDestinations from "./featuredDestinations";
@@ -7,15 +8,18 @@ import Hero from "./hero";
 import FeaturedExperiences from "./featuredExperiences";
 import ErrorMessage from "./errorMessage";
 import AllExperiences from "./allExperiences";
+import { destinationContext } from "@/lib/contexts/DestinationContext";
+import type { DestinationContext } from "@/lib/contexts/DestinationContext";
 import type { Destination } from "@/lib/types/reisen";
 
-export default function DestinationResults({ slug }: { slug: string }) {
+export default function DestinationResults() {
   const [destination, setDestination] = useState<Destination | null>(null);
   const [status, setStatus] = useState<{
     hasError: boolean;
     errorMessage: string;
     isLoading: boolean;
   }>({ hasError: false, errorMessage: "", isLoading: true });
+  const { slug } = useContext(destinationContext) as DestinationContext;
 
   useEffect(() => {
     async function getDestination() {
@@ -53,10 +57,10 @@ export default function DestinationResults({ slug }: { slug: string }) {
           <>
             <Hero destination={destination} />
             <div className="flex w-full flex-col gap-12">
-              <AiRecommendations slug={slug} />
-              <AllExperiences destination={destination} slug={slug} />
+              <AiRecommendations />
+              <AllExperiences destination={destination} />
               <FeaturedExperiences />
-              <FeaturedDestinations slug={slug} />
+              <FeaturedDestinations />
             </div>
           </>
         )}

@@ -1,8 +1,12 @@
+import { useContext } from "react";
 import { Sparkles } from "lucide-react";
+import { destinationContext } from "@/lib/contexts/DestinationContext";
 import ExperienceCard from "@/components/experiences/experienceCard";
 import { readRecommendations } from "@/lib/recommendations";
+import type { DestinationContext } from "@/lib/contexts/DestinationContext";
 
-export default function AiRecommendations({ slug }: { slug: string }) {
+export default function AiRecommendations() {
+  const { slug } = useContext(destinationContext) as DestinationContext;
   const stored = readRecommendations(slug);
   const recommended = stored?.recommended;
   const prompt = stored?.prompt;

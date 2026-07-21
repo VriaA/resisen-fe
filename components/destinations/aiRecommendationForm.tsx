@@ -64,9 +64,11 @@ export default function AiRecommendationForm({ slug }: { slug: string }) {
   const trimmed = prompt.trim();
   const canSubmit = trimmed.length >= MIN_PROMPT && status !== "generating";
 
+  const getResultsPath = (slug: string) => `/experiences/destination/${slug}`;
+
   function leaveToResults() {
     controllerRef.current?.abort();
-    router.push(`/destinations/${slug}`);
+    router.push(getResultsPath(slug));
   }
 
   async function handleSubmit(event?: React.FormEvent) {
@@ -91,7 +93,7 @@ export default function AiRecommendationForm({ slug }: { slug: string }) {
 
       storeRecommendations({ slug, prompt: trimmed, recommended });
       setStatus("success");
-      router.push(`/destinations/${slug}`);
+      router.push(getResultsPath(slug));
     } catch (err) {
       if (controller.signal.aborted) return;
       if (err instanceof ApiRequestError) {

@@ -1,22 +1,22 @@
 "use client";
 
-import { useState, useMemo, useEffect } from "react";
+import { useContext, useState, useMemo, useEffect } from "react";
 import debounce from "lodash.debounce";
 import DestinationFilters from "./destinationFilters";
 import ErrorMessage from "./errorMessage";
 import LoadingSkeleton from "./loadingSkeleton";
 import ExperienceCard from "@/components/experiences/experienceCard";
 import InfoMessage from "./infoMessage";
+import { destinationContext } from "@/lib/contexts/DestinationContext";
 import { experiencesApi } from "@/lib/api-client";
 import type { DestinationFilterState } from "./destinationFilters";
 import type { Destination, Experience } from "@/lib/types/reisen";
+import type { DestinationContext } from "@/lib/contexts/DestinationContext";
 
 export default function AllExperiences({
   destination,
-  slug,
 }: {
   destination: Destination | null;
-  slug: string;
 }) {
   const RESULTS_LIMIT = 24;
   const FILTER_DEBOUNCE_MS = 500;
@@ -41,6 +41,8 @@ export default function AllExperiences({
     isLoading: true,
     isLoadingMore: false,
   });
+
+  const { slug } = useContext(destinationContext) as DestinationContext;
 
   function updateFilters(next: Partial<DestinationFilterState>) {
     setFilters((prev) => ({ ...prev, ...next }));

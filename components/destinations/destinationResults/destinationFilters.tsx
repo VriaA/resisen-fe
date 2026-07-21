@@ -153,7 +153,7 @@ export default function DestinationFilters({
         value={currentSlug}
         onValueChange={(slug) => {
           if (slug !== currentSlug) {
-            router.push(`/destinations/${slug}`);
+            router.push(`/experiences/destination/${slug}`);
           }
         }}
       >

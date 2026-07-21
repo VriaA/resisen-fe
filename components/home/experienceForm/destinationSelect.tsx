@@ -29,7 +29,6 @@ export default function DestinationSelect({
         className="absolute inset-0 cursor-pointer appearance-none opacity-0"
       >
         {destinations.map((destination, index) => {
-          console.log(destinations);
           return (
             <option
               key={`{destination.slug}-${index}`}

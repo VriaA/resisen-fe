@@ -33,18 +33,41 @@ import type {
 } from "@/lib/types/reisen";
 import ExperienceCard from "@/components/experiences/experienceCard";
 
-
 const STATUS_CONFIG: Record<
   BookingStatus,
   { label: string; textClass: string; bgClass: string; icon: typeof Hourglass }
 > = {
-  pending: { label: "Pending", textClass: "text-warning", bgClass: "bg-warning/10", icon: Hourglass },
-  confirmed: { label: "Confirmed", textClass: "text-success", bgClass: "bg-success/10", icon: CheckCircle2 },
-  completed: { label: "Completed", textClass: "text-info", bgClass: "bg-info/10", icon: CheckCircle2 },
-  cancelled: { label: "Cancelled", textClass: "text-error", bgClass: "bg-error/10", icon: XCircle },
+  pending: {
+    label: "Pending",
+    textClass: "text-warning",
+    bgClass: "bg-warning/10",
+    icon: Hourglass,
+  },
+  confirmed: {
+    label: "Confirmed",
+    textClass: "text-success",
+    bgClass: "bg-success/10",
+    icon: CheckCircle2,
+  },
+  completed: {
+    label: "Completed",
+    textClass: "text-info",
+    bgClass: "bg-info/10",
+    icon: CheckCircle2,
+  },
+  cancelled: {
+    label: "Cancelled",
+    textClass: "text-error",
+    bgClass: "bg-error/10",
+    icon: XCircle,
+  },
 };
 
-const CATEGORY_FILTERS: { value: ExperienceCategory | "all"; label: string; icon: typeof Compass }[] = [
+const CATEGORY_FILTERS: {
+  value: ExperienceCategory | "all";
+  label: string;
+  icon: typeof Compass;
+}[] = [
   { value: "all", label: "All", icon: Compass },
   { value: "adventure", label: "Adventure", icon: Mountain },
   { value: "cultural", label: "Culture", icon: Landmark },
@@ -57,7 +80,11 @@ const CATEGORY_FILTERS: { value: ExperienceCategory | "all"; label: string; icon
 ];
 
 function formatDate(iso: string): string {
-  return new Date(iso).toLocaleDateString("en-US", { day: "numeric", month: "short", year: "numeric" });
+  return new Date(iso).toLocaleDateString("en-US", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
 }
 
 function getGreeting(): string {
@@ -101,9 +128,19 @@ function BackgroundDecor() {
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden -z-10">
       <div className="blob-drift absolute -top-24 -left-24 w-96 h-96 rounded-full bg-primary/25 blur-3xl" />
-      <div className="blob-drift absolute top-40 right-30 w-80 h-80 rounded-full bg-secondary/15 blur-3xl" style={{ animationDelay: "2.5s" }} />
-      <Compass size={28} className="float-slow absolute top-24 right-[12%] text-primary/40" />
-      <Sparkles size={20} className="float-slow absolute top-[55%] left-[6%] text-secondary/30" style={{ animationDelay: "1.2s" }} />
+      <div
+        className="blob-drift absolute top-40 right-30 w-80 h-80 rounded-full bg-secondary/15 blur-3xl"
+        style={{ animationDelay: "2.5s" }}
+      />
+      <Compass
+        size={28}
+        className="float-slow absolute top-24 right-[12%] text-primary/40"
+      />
+      <Sparkles
+        size={20}
+        className="float-slow absolute top-[55%] left-[6%] text-secondary/30"
+        style={{ animationDelay: "1.2s" }}
+      />
     </div>
   );
 }
@@ -112,7 +149,9 @@ function StatusBadge({ status }: { status: BookingStatus }) {
   const cfg = STATUS_CONFIG[status];
   const Icon = cfg.icon;
   return (
-    <span className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-extra-small ${cfg.textClass} ${cfg.bgClass}`}>
+    <span
+      className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-extra-small ${cfg.textClass} ${cfg.bgClass}`}
+    >
       <Icon size={13} strokeWidth={2.2} />
       {cfg.label}
     </span>
@@ -134,7 +173,9 @@ function CategoryPill({
     <button
       onClick={onClick}
       className={`flex items-center gap-2 rounded-full px-4 py-2.5 text-small-medium whitespace-nowrap transition-all duration-200 ${
-        active ? "cta-gradient text-dark-base scale-105 shadow-[0px_4px_10px_0px_rgba(127,92,204,0.25)]" : "bg-primary-50 text-body-dark hover:text-dark-base hover:scale-[1.03]"
+        active
+          ? "cta-gradient text-dark-base scale-105 shadow-[0px_4px_10px_0px_rgba(127,92,204,0.25)]"
+          : "bg-primary-50 text-body-dark hover:text-dark-base hover:scale-[1.03]"
       }`}
     >
       <Icon size={15} />
@@ -145,80 +186,7 @@ function CategoryPill({
 
 // ---------- Browse cards ----------
 
-function ExperienceBrowseCard({
-  experience,
-  saved,
-  onToggleSave,
-  onOpenDetail,
-  delayMs,
-}: {
-  experience: Experience;
-  saved: boolean;
-  onToggleSave: (id: string) => void;
-  onOpenDetail: (experience: Experience) => void;
-  delayMs: number;
-}) {
-  const [pulsing, setPulsing] = useState(false);
-  const image = experience.images?.[0];
-
-  function handleHeartClick(e: React.MouseEvent) {
-    e.stopPropagation();
-    setPulsing(true);
-    onToggleSave(experience.experienceId);
-    setTimeout(() => setPulsing(false), 350);
-  }
-
-  return (
-    <div
-      onClick={() => onOpenDetail(experience)}
-      className="fade-in-up flex flex-col rounded-3xl border border-body-off bg-white-base overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0px_12px_28px_0px_rgba(127,92,204,0.18)] cursor-pointer"
-      style={{ animationDelay: `${delayMs}ms` }}
-    >
-      <div className="relative aspect-[4/3] overflow-hidden">
-        {image ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img src={image} alt={experience.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
-        ) : (
-          <div className="w-full h-full cta-gradient flex items-center justify-center">
-            <Compass size={32} className="text-white-base/70" />
-          </div>
-        )}
-        {experience.duration && (
-          <span className="absolute bottom-3 left-3 rounded-full bg-dark-base/70 px-2.5 py-1 text-extra-small text-white-base flex items-center gap-1">
-            <Clock size={11} /> {experience.duration}
-          </span>
-        )}
-        <button
-          onClick={handleHeartClick}
-          aria-label={saved ? "Remove from saved" : "Save experience"}
-          className="absolute top-3 right-3 w-9 h-9 rounded-full bg-white-base/90 flex items-center justify-center shadow-sm transition-transform hover:scale-110"
-        >
-          <Heart size={16} className={`${saved ? "fill-secondary text-secondary" : "text-body-dark"} ${pulsing ? "heart-pulse" : ""}`} />
-        </button>
-      </div>
-
-      <div className="p-4 flex flex-col gap-1 flex-1">
-        <div className="text-body-medium text-dark-base line-clamp-1">{experience.title}</div>
-        <div className="flex items-center gap-1 text-extra-small text-body-dark">
-          <MapPin size={12} /> {experience.destination}
-        </div>
-        <div className="text-small text-body-dark mt-1">
-          from <span className="text-body-medium text-dark-base">{formatPrice(experience.price, experience.currency)}</span> /person
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function BrowseTab({
-  savedIds,
-  onToggleSave,
-  onOpenDetail,
-}: {
-  savedIds: Set<string>;
-  onToggleSave: (id: string) => void;
-  onOpenDetail: (experience: Experience) => void;
-}) {
+function BrowseTab() {
   const [category, setCategory] = useState<ExperienceCategory | "all">("all");
   const [experiences, setExperiences] = useState<Experience[]>([]);
   const [loading, setLoading] = useState(true);
@@ -236,7 +204,12 @@ function BrowseTab({
           if (!cancelled) setExperiences(res.items);
         })
         .catch((err) => {
-          if (!cancelled) setError(err instanceof ApiRequestError ? err.message : "Could not load experiences.");
+          if (!cancelled)
+            setError(
+              err instanceof ApiRequestError
+                ? err.message
+                : "Could not load experiences.",
+            );
         })
         .finally(() => {
           if (!cancelled) setLoading(false);
@@ -285,34 +258,26 @@ function BrowseTab({
           No experiences in this category yet.
         </div>
       )}
-
-      {!loading && !error && experiences.length > 0 && (
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
-          {experiences.map((e, i) => (
-            <ExperienceBrowseCard
-              key={e.experienceId}
-              experience={e}
-              saved={savedIds.has(e.experienceId)}
-              onToggleSave={onToggleSave}
-              onOpenDetail={onOpenDetail}
-              delayMs={i * 60}
-            />
-          ))}
-        </div>
-      )}
     </div>
   );
 }
 
-
-function BookingRow({ booking, delayMs }: { booking: Booking; delayMs: number }) {
+function BookingRow({
+  booking,
+  delayMs,
+}: {
+  booking: Booking;
+  delayMs: number;
+}) {
   return (
     <div
       className="fade-in-up flex items-center justify-between gap-4 flex-wrap rounded-2xl border border-body-off bg-white-base p-5 transition-all duration-300 hover:border-primary hover:-translate-y-0.5 hover:shadow-[0px_8px_18px_0px_rgba(127,92,204,0.14)]"
       style={{ animationDelay: `${delayMs}ms` }}
     >
       <div className="min-w-0">
-        <div className="text-body-medium text-dark-base mb-1.5">{booking.experienceTitle}</div>
+        <div className="text-body-medium text-dark-base mb-1.5">
+          {booking.experienceTitle}
+        </div>
         <div className="flex items-center gap-4 flex-wrap text-extra-small text-body-dark">
           {booking.destination && (
             <span className="flex items-center gap-1">
@@ -328,7 +293,9 @@ function BookingRow({ booking, delayMs }: { booking: Booking; delayMs: number })
         </div>
       </div>
       <div className="flex items-center gap-4 shrink-0">
-        <span className="text-body-medium text-secondary">{formatPrice(booking.totalPrice, booking.currency)}</span>
+        <span className="text-body-medium text-secondary">
+          {formatPrice(booking.totalPrice, booking.currency)}
+        </span>
         <StatusBadge status={booking.status} />
       </div>
     </div>
@@ -349,13 +316,21 @@ function DashboardSkeleton() {
   );
 }
 
-function DashboardError({ message, onRetry }: { message: string; onRetry: () => void }) {
+function DashboardError({
+  message,
+  onRetry,
+}: {
+  message: string;
+  onRetry: () => void;
+}) {
   return (
     <div className="fade-in-up max-w-md mx-auto mt-20 text-center">
       <AlertTriangle size={28} className="text-error mx-auto mb-3" />
       <p className="text-body-regular text-body-dark mb-4">{message}</p>
       <button onClick={onRetry} className="primary-cta">
-        <span className="primary-cta-inner !py-2.5 !px-6 text-dark-base">Try again</span>
+        <span className="primary-cta-inner !py-2.5 !px-6 text-dark-base">
+          Try again
+        </span>
       </button>
     </div>
   );
@@ -364,7 +339,9 @@ function DashboardError({ message, onRetry }: { message: string; onRetry: () => 
 export default function CustomerDashboard() {
   const [data, setData] = useState<DashboardResponse | null>(null);
   const [user, setUser] = useState<PublicUser | null>(null);
-  const [status, setStatus] = useState<"loading" | "error" | "ready">("loading");
+  const [status, setStatus] = useState<"loading" | "error" | "ready">(
+    "loading",
+  );
   const [errorMessage, setErrorMessage] = useState("");
   const [tab, setTab] = useState<"browse" | "bookings" | "saved">("browse");
   const router = useRouter();
@@ -375,12 +352,19 @@ export default function CustomerDashboard() {
   async function load() {
     setStatus("loading");
     try {
-      const [dashboardRes, userRes] = await Promise.all([api.getDashboard(), api.me()]);
+      const [dashboardRes, userRes] = await Promise.all([
+        api.getDashboard(),
+        api.me(),
+      ]);
       setData(dashboardRes);
       setUser(userRes);
       setStatus("ready");
     } catch (err) {
-      setErrorMessage(err instanceof ApiRequestError ? err.message : "Something went wrong loading your dashboard.");
+      setErrorMessage(
+        err instanceof ApiRequestError
+          ? err.message
+          : "Something went wrong loading your dashboard.",
+      );
       setStatus("error");
     }
   }
@@ -389,14 +373,18 @@ export default function CustomerDashboard() {
     void Promise.resolve().then(load);
   }, []);
 
-  const savedIds = new Set(data?.savedExperiences.map((e) => e.experienceId) ?? []);
+  const savedIds = new Set(
+    data?.savedExperiences.map((e) => e.experienceId) ?? [],
+  );
 
   async function handleUnsave(experienceId: string) {
     if (!data) return;
     const previous = data;
     setData({
       ...data,
-      savedExperiences: data.savedExperiences.filter((e) => e.experienceId !== experienceId),
+      savedExperiences: data.savedExperiences.filter(
+        (e) => e.experienceId !== experienceId,
+      ),
       stats: { ...data.stats, totalSaved: data.stats.totalSaved - 1 },
     });
     try {
@@ -426,17 +414,25 @@ export default function CustomerDashboard() {
       <BackgroundDecor />
 
       {status === "loading" && <DashboardSkeleton />}
-      {status === "error" && <DashboardError message={errorMessage} onRetry={load} />}
+      {status === "error" && (
+        <DashboardError message={errorMessage} onRetry={load} />
+      )}
 
       {status === "ready" && data && (
         <div className="relative w-full max-w-240 mx-auto flex flex-col gap-8">
           {/* Welcome header */}
           <div className="fade-in-up flex items-center justify-between gap-8 flex-wrap">
             <div className="flex-1 min-w-65">
-              <h1 className="text-section-title text-dark-base">Your dashboard</h1>
+              <h1 className="text-section-title text-dark-base">
+                Your dashboard
+              </h1>
               <div className="flex items-center gap-1.5 text-secondary text-small-medium my-2">
                 <Sparkles size={14} className="float-slow" />
-                <span>{getGreeting()}{user?.firstName ? `, ${user.firstName}` : ""} — ready for your next trip?</span>
+                <span>
+                  {getGreeting()}
+                  {user?.firstName ? `, ${user.firstName}` : ""} — ready for
+                  your next trip?
+                </span>
               </div>
             </div>
 
@@ -468,18 +464,29 @@ export default function CustomerDashboard() {
           </div>
 
           {/* Tabs */}
-          <div className="fade-in-up flex items-center justify-between flex-wrap gap-4" style={{ animationDelay: "80ms" }}>
+          <div
+            className="fade-in-up flex items-center justify-between flex-wrap gap-4"
+            style={{ animationDelay: "80ms" }}
+          >
             <div className="flex items-center gap-1 rounded-full bg-primary-50 p-1.5">
               {[
                 { key: "browse" as const, label: "Browse" },
-                { key: "saved" as const, label: `Saved (${data.stats.totalSaved})` },
-                { key: "bookings" as const, label: `Bookings (${data.stats.totalBookings})` },
+                {
+                  key: "saved" as const,
+                  label: `Saved (${data.stats.totalSaved})`,
+                },
+                {
+                  key: "bookings" as const,
+                  label: `Bookings (${data.stats.totalBookings})`,
+                },
               ].map((t) => (
                 <button
                   key={t.key}
                   onClick={() => setTab(t.key)}
                   className={`relative rounded-full px-5 py-2 text-small-medium transition-all duration-200 ${
-                    tab === t.key ? "bg-white-base text-dark-base shadow-sm" : "text-body-dark hover:text-dark-base"
+                    tab === t.key
+                      ? "bg-white-base text-dark-base shadow-sm"
+                      : "text-body-dark hover:text-dark-base"
                   }`}
                 >
                   {t.label}
@@ -488,9 +495,7 @@ export default function CustomerDashboard() {
             </div>
           </div>
 
-          {tab === "browse" && (
-            <BrowseTab savedIds={savedIds} onToggleSave={handleToggleSave} onOpenDetail={openExperience} />
-          )}
+          {tab === "browse" && <BrowseTab />}
 
           {tab === "bookings" && (
             <section className="flex flex-col gap-3">
@@ -499,7 +504,9 @@ export default function CustomerDashboard() {
                   No bookings yet — browse experiences to plan your first trip.
                 </div>
               ) : (
-                data.recentBookings.map((b, i) => <BookingRow key={b.bookingId} booking={b} delayMs={i * 60} />)
+                data.recentBookings.map((b, i) => (
+                  <BookingRow key={b.bookingId} booking={b} delayMs={i * 60} />
+                ))
               )}
             </section>
           )}
@@ -508,7 +515,8 @@ export default function CustomerDashboard() {
             <section>
               {data.savedExperiences.length === 0 ? (
                 <div className="fade-in-up rounded-3xl border border-dashed border-body-off p-10 text-center text-body-dark text-body-regular">
-                  Nothing saved yet — tap the heart on any experience to keep it here.
+                  Nothing saved yet — tap the heart on any experience to keep it
+                  here.
                 </div>
               ) : (
                 <div className="grid grid-cols-2 lg:grid-cols-3 gap-5">
@@ -527,7 +535,6 @@ export default function CustomerDashboard() {
           )}
         </div>
       )}
-
     </div>
   );
 }

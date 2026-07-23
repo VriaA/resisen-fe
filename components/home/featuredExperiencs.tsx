@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { experiencesApi, ApiRequestError } from "@/lib/api-client";
-import { AlertCircleIcon, AlertTriangle } from "lucide-react";
+import StateMessage from "./stateMessage";
 import type { Experience } from "@/lib/types/reisen";
 
 const FEATURED_LIMIT = 4;
@@ -22,29 +22,6 @@ async function getFeaturedExperiences(): Promise<FeaturedResult> {
         : "Something went wrong while loading featured experiences.";
     return { status: "error", message };
   }
-}
-
-function StateMessage({
-  type,
-  children,
-}: {
-  type: "error" | "info";
-  children: React.ReactNode;
-}) {
-  return (
-    <div className="flex w-full max-w-160 flex-col items-center gap-3 text-center">
-      {type === "error" ? (
-        <AlertTriangle size={40} className="text-error" />
-      ) : (
-        <AlertCircleIcon size={40} className="text-info" />
-      )}
-      <p
-        className={`text-body-regular ${type === "error" ? "text-error" : "text-body-dark"}`}
-      >
-        {children}
-      </p>
-    </div>
-  );
 }
 
 export default async function FeaturedExperiences() {

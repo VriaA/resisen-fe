@@ -1,7 +1,7 @@
 import Image from "next/image";
-import { AlertCircleIcon, AlertTriangle } from "lucide-react";
 import { destinationsApi, ApiRequestError } from "@/lib/api-client";
 import FeaturedDestinationsCarousel from "@/components/home/featuredDestinationsCarousel";
+import StateMessage from "./stateMessage";
 import type { Destination } from "@/lib/types/reisen";
 
 type FeaturedDestinationsResult =
@@ -42,19 +42,11 @@ export default async function FeaturedDestinations() {
       />
       <div className="no-scrollbar w-full max-w-400 px-5 md:px-0 py-10 md:overflow-x-scroll md:overflow-y-visible">
         {result.status === "error" ? (
-          <div className="mx-auto flex flex-col items-center gap-3">
-            <AlertTriangle size={40} className="text-error" />
-            <p className="text-section-inner-title text-error">
-              {result.message}
-            </p>
-          </div>
+          <StateMessage type="error">{result.message}</StateMessage>
         ) : result.destinations.length === 0 ? (
-          <div className="mx-auto flex flex-col items-center gap-3">
-            <AlertCircleIcon size={40} className="text-info" />
-            <p className="text-body-regular text-body-dark">
-              Check back soon for new experiences!
-            </p>
-          </div>
+          <StateMessage type="info">
+            Check back soon for new experiences!
+          </StateMessage>
         ) : (
           <FeaturedDestinationsCarousel destinations={result.destinations} />
         )}

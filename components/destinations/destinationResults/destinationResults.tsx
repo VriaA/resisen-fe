@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useContext } from "react";
 import { destinationsApi } from "@/lib/api-client";
-import AiRecommendations from "./aiRecommendations";
+import AiRecommendations from "./aiRecommendations/aiRecommendations";
 import FeaturedDestinations from "./featuredDestinations";
 import Hero from "./hero";
 import FeaturedExperiences from "./featuredExperiences";

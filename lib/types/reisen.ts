@@ -1,18 +1,18 @@
-export type UserRole = 'customer' | 'provider' | 'admin';
+export type UserRole = "customer" | "provider" | "admin";
 
 export type ExperienceCategory =
-  | 'adventure'
-  | 'relaxation'
-  | 'nightlife'
-  | 'cultural'
-  | 'wildlife'
-  | 'water_sports'
-  | 'romantic'
-  | 'family_friendly';
+  | "adventure"
+  | "relaxation"
+  | "nightlife"
+  | "cultural"
+  | "wildlife"
+  | "water_sports"
+  | "romantic"
+  | "family_friendly";
 
-export type ExperienceStatus = 'draft' | 'published' | 'archived';
-export type BookingStatus = 'pending' | 'confirmed' | 'cancelled' | 'completed';
-export type ProviderApplicationStatus = 'pending' | 'approved' | 'rejected';
+export type ExperienceStatus = "draft" | "published" | "archived";
+export type BookingStatus = "pending" | "confirmed" | "cancelled" | "completed";
+export type ProviderApplicationStatus = "pending" | "approved" | "rejected";
 
 export interface PublicUser {
   userId: string;
@@ -197,11 +197,11 @@ export interface CreateExperienceRequest {
   maxGroupSize: number;
   images?: string[];
   featured?: boolean;
-  status?: 'draft' | 'published';
+  status?: "draft" | "published";
 }
 
 export type UpdateExperienceRequest = Partial<
-  Omit<CreateExperienceRequest, 'numberOfDays'> & {
+  Omit<CreateExperienceRequest, "numberOfDays"> & {
     numberOfDays: number;
     status: ExperienceStatus;
   }
@@ -255,7 +255,7 @@ export interface ApiError {
 }
 
 export interface ReviewProviderApplicationRequest {
-  status: 'approved' | 'rejected';
+  status: "approved" | "rejected";
   rejectionReason?: string;
 }
 
@@ -267,6 +267,58 @@ export interface GenerateItineraryRequest {
   durationUnit: "hours" | "days" | "weeks" | "months";
 }
 
-export interface SaveItineraryRequest extends GenerateItineraryRequest {
-  start?: boolean;
+export type TripDurationUnit = "hours" | "days" | "weeks" | "months";
+
+export interface TripDuration {
+  value: number;
+  unit: TripDurationUnit;
 }
+
+export type ItineraryCheckpointStatus = "locked" | "active" | "completed";
+
+export type ItineraryStatus = "not_started" | "in_progress" | "completed";
+
+export interface ItineraryCheckpoint {
+  checkpointId: string;
+  order: number;
+  experienceId: string;
+  title: string;
+  price: number;
+  status: ItineraryCheckpointStatus;
+  completedAt: string;
+  imageUrl: string;
+}
+
+export interface Itinerary {
+  itineraryId: string;
+  userId: string;
+  destination: string;
+  destinationSlug: string;
+  prompt: string;
+  durationValue: number;
+  durationUnit: TripDurationUnit;
+  checkpoints: ItineraryCheckpoint[];
+  totalPrice: number;
+  currency: string;
+  status: ItineraryStatus;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface GenerateItineraryResponse {
+  itinerary: Itinerary;
+}
+
+export interface SavedItineraries {
+  items: Itinerary[];
+}
+
+export interface SaveItineraryRequest extends GenerateItineraryRequest {
+  itineraryId: string;
+}
+
+export interface StartItineraryRequest extends SaveItineraryRequest {
+  start: boolean;
+}
+
+export type ItineraryUIScreenOptions = "itinerary" | "saved-itineraries" | null;

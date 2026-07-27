@@ -24,6 +24,12 @@ import type {
   RegisterRequest,
   ReviewProviderApplicationRequest,
   UpdateExperienceRequest,
+  SavedItineraries,
+  GenerateItineraryRequest,
+  GenerateItineraryResponse,
+  SaveItineraryRequest,
+  Itinerary,
+  StartItineraryRequest,
 } from "./types/reisen";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000";
@@ -191,6 +197,45 @@ export const experiencesApi = {
     }),
 };
 
+// ---------- ItinerariesApi ----------
+export const ItinerariesApi = {
+  generate: (body: GenerateItineraryRequest) =>
+    apiFetch<GenerateItineraryResponse>(`/api/itineraries/generate`, {
+      method: "POST",
+      body: JSON.stringify(body),
+    }),
+  save: (body: SaveItineraryRequest) => {
+    return apiFetch(`/api/itineraries`, {
+      method: "POST",
+      body: JSON.stringify(body),
+    });
+  },
+  list: () => apiFetch<SavedItineraries>(`/api/itineraries`),
+  get: (itineraryId: string) =>
+    apiFetch<Itinerary>(`/api/itineraries/${itineraryId}`),
+  delete: (itineraryId: string) =>
+    apiFetch<ApiSuccess<string>>(`/api/itineraries/${itineraryId}`, {
+      method: "DELETE",
+    }),
+  startSaved: (itineraryId: string) =>
+    apiFetch<Itinerary>(`/api/itineraries/${itineraryId}/start`, {
+      method: "PATCH",
+    }),
+  start: (body: StartItineraryRequest) => {
+    return apiFetch<Itinerary>(`/api/itineraries`, {
+      method: "POST",
+      body: JSON.stringify(body),
+    });
+  },
+  completeCheckpoint: (itineraryId: string, checkpointId: string) =>
+    apiFetch<Itinerary>(
+      `/api/itineraries/${itineraryId}/checkpoints/${checkpointId}/complete`,
+      {
+        method: "PATCH",
+      },
+    ),
+};
+
 // ---------- Destinations ----------
 export const destinationsApi = {
   list: (params?: { featured?: boolean; limit?: number; cursor?: string }) =>
@@ -308,7 +353,8 @@ export const adminApi = {
 
 // ---------- Uploads ----------
 export const uploadsApi = {
-  sign: () => apiFetch<UploadSignResponse>("/api/uploads/sign", { method: "POST" }),
+  sign: () =>
+    apiFetch<UploadSignResponse>("/api/uploads/sign", { method: "POST" }),
 };
 
 export const api = {
@@ -320,5 +366,6 @@ export const api = {
   saved: savedApi,
   providers: providersApi,
   admin: adminApi,
-  uploads: uploadsApi, 
+  uploads: uploadsApi,
+  itineraries: ItinerariesApi,
 };

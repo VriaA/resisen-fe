@@ -10,7 +10,7 @@ import InfoMessage from "./infoMessage";
 import { destinationContext } from "@/lib/contexts/DestinationContext";
 import { experiencesApi } from "@/lib/api-client";
 import type { DestinationFilterState } from "./destinationFilters";
-import type { Destination, Experience } from "@/lib/types/reisen";
+import type { Destination, Experience } from "@/lib/types/resisen";
 import type { DestinationContext } from "@/lib/contexts/DestinationContext";
 
 export default function AllExperiences({

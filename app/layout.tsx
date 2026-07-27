@@ -87,9 +87,9 @@ const cabinetGrotesk = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Reisen",
+  title: "Resisen",
   description:
-    "Whether your interests are vinyl shops or hidden hiking trails, Reisen builds a trip around it.",
+    "Whether your interests are vinyl shops or hidden hiking trails, Resisen builds a trip around it.",
 };
 
 export default function RootLayout({

@@ -13,7 +13,7 @@ const steps: Readonly<Array<{ heading: string; description: string }>> = [
   {
     heading: "Get your match",
     description:
-      "Reisen builds a personalised trip and pairs you with local guides who know the place inside out.",
+      "Resisen builds a personalised trip and pairs you with local guides who know the place inside out.",
   },
 ];
 

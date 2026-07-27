@@ -2,7 +2,7 @@ import Image from "next/image";
 import { destinationsApi, ApiRequestError } from "@/lib/api-client";
 import FeaturedDestinationsCarousel from "@/components/home/featuredDestinationsCarousel";
 import StateMessage from "./stateMessage";
-import type { Destination } from "@/lib/types/reisen";
+import type { Destination } from "@/lib/types/resisen";
 
 type FeaturedDestinationsResult =
   | { status: "ok"; destinations: Destination[] }

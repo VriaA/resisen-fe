@@ -18,7 +18,7 @@ import {
 } from "@/lib/api-client";
 import { getStoredToken } from "@/lib/auth-client";
 import { storeRecommendations } from "@/lib/recommendations";
-import type { Destination } from "@/lib/types/reisen";
+import type { Destination } from "@/lib/types/resisen";
 
 const MIN_PROMPT = 3;
 const MAX_PROMPT = 1000;

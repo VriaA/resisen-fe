@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useDestinationModal } from "@/components/home/destinationExperienceModal";
-import type { Destination } from "@/lib/types/reisen";
+import type { Destination } from "@/lib/types/resisen";
 
 const PLACEHOLDER_IMAGE = "/experience_placeholder.jpg";
 

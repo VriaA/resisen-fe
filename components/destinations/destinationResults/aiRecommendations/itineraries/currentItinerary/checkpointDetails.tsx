@@ -7,7 +7,7 @@ import type {
   Itinerary,
   ItineraryCheckpoint,
   SavedItineraries,
-} from "@/lib/types/reisen";
+} from "@/lib/types/resisen";
 
 export default function CheckpointDetails({
   checkpoint,

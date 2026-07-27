@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import DestinationSelect from "./destinationSelect";
-import type { Destination } from "@/lib/types/reisen";
+import type { Destination } from "@/lib/types/resisen";
 
 export default function Ticket({
   selected,

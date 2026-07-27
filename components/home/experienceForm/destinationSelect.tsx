@@ -1,5 +1,5 @@
 import { ChevronDown } from "lucide-react";
-import type { Destination } from "@/lib/types/reisen";
+import type { Destination } from "@/lib/types/resisen";
 
 export default function DestinationSelect({
   destinations,

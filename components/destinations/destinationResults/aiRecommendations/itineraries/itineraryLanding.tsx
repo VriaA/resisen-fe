@@ -12,7 +12,7 @@ import type {
   TripDurationUnit,
   ItineraryUIScreenOptions,
   Itinerary,
-} from "@/lib/types/reisen";
+} from "@/lib/types/resisen";
 
 export default function ItineraryLanding({
   recommended,

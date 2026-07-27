@@ -7,7 +7,7 @@ import {
   getStoredUser,
   subscribeToAuthSessionChange,
 } from "@/lib/auth-client";
-import type { PublicUser } from "@/lib/types/reisen";
+import type { PublicUser } from "@/lib/types/resisen";
 
 export interface AuthSession {
   isLoggedIn: boolean;

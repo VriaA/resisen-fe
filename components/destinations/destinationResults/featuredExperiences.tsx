@@ -4,7 +4,7 @@ import ExperienceCard from "@/components/experiences/experienceCard";
 import LoadingSkeleton from "./loadingSkeleton";
 import InfoMessage from "./infoMessage";
 import ErrorMessage from "./errorMessage";
-import type { Experience } from "@/lib/types/reisen";
+import type { Experience } from "@/lib/types/resisen";
 
 export default function FeaturedExperiences() {
   const FEATURED_LIMIT = 8;

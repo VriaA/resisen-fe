@@ -1,5 +1,5 @@
 import Image from "next/image";
-import type { Destination } from "@/lib/types/reisen";
+import type { Destination } from "@/lib/types/resisen";
 
 const PLACEHOLDER_IMAGE = "/experience_placeholder.jpg";
 

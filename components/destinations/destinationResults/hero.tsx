@@ -1,4 +1,4 @@
-import { Destination } from "@/lib/types/reisen";
+import { Destination } from "@/lib/types/resisen";
 import { MapPin } from "lucide-react";
 
 export default function Hero({

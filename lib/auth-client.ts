@@ -1,4 +1,4 @@
-import type { PublicUser } from "./types/reisen";
+import type { PublicUser } from "./types/resisen";
 
 const TOKEN_KEY = "tc_token";
 const USER_KEY = "tc_user";
@@ -17,8 +17,6 @@ export function subscribeToAuthSessionChange(callback: () => void) {
     window.removeEventListener("storage", callback);
   };
 }
-
-
 
 export function getStoredUser(): PublicUser | null {
   if (typeof window === "undefined") return null;

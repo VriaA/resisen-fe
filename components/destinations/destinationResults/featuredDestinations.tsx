@@ -3,7 +3,7 @@
 import { useContext, useEffect, useState } from "react";
 import { useDestinationModal } from "@/components/home/destinationExperienceModal";
 import { destinationsApi } from "@/lib/api-client";
-import { Destination } from "@/lib/types/reisen";
+import { Destination } from "@/lib/types/resisen";
 import DestinationCard from "../destinationCard";
 import InfoMessage from "./infoMessage";
 import ErrorMessage from "./errorMessage";

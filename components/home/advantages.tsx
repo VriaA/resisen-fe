@@ -12,7 +12,7 @@ const advantages: Readonly<
   {
     heading: "No cookie-cutter itineraries",
     description:
-      "Tell us what you're into, vinyl shops and slow coffee, hidden hiking trails, and Reisen builds a trip around it. No obligatory selfies in front of the thing everyone photographs.",
+      "Tell us what you're into, vinyl shops and slow coffee, hidden hiking trails, and Resisen builds a trip around it. No obligatory selfies in front of the thing everyone photographs.",
     image: "/itinerary_advantage.svg",
   },
 ];

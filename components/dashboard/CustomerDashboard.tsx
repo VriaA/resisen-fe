@@ -30,7 +30,7 @@ import type {
   BookingStatus,
   ExperienceCategory,
   PublicUser,
-} from "@/lib/types/reisen";
+} from "@/lib/types/resisen";
 import ExperienceCard from "@/components/experiences/experienceCard";
 
 const STATUS_CONFIG: Record<

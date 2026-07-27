@@ -6,7 +6,7 @@ import DestinationExperienceModal from "@/components/home/destinationExperienceM
 import SelectPropmt from "./experienceForm/selectPrompt";
 import SkeletonLoader from "./experienceForm/skeletonLoader";
 import Ticket from "./experienceForm/Ticket";
-import type { Destination } from "@/lib/types/reisen";
+import type { Destination } from "@/lib/types/resisen";
 
 export default function ExperienceForm() {
   const [destinations, setDestinations] = useState<Destination[]>([]);

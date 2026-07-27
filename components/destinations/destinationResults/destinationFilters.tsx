@@ -16,7 +16,7 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import type { Destination, ExperienceCategory } from "@/lib/types/reisen";
+import type { Destination, ExperienceCategory } from "@/lib/types/resisen";
 
 export type DestinationFilterState = {
   search: string;

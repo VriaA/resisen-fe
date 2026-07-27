@@ -16,7 +16,7 @@ import type {
   ItineraryStatus,
   SavedItineraries,
   ItineraryUIScreenOptions,
-} from "@/lib/types/reisen";
+} from "@/lib/types/resisen";
 import { ItinerariesApi } from "@/lib/api-client";
 
 interface SavedItinerariesProps {

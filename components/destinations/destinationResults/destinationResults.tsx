@@ -10,7 +10,7 @@ import ErrorMessage from "./errorMessage";
 import AllExperiences from "./allExperiences";
 import { destinationContext } from "@/lib/contexts/DestinationContext";
 import type { DestinationContext } from "@/lib/contexts/DestinationContext";
-import type { Destination } from "@/lib/types/reisen";
+import type { Destination } from "@/lib/types/resisen";
 
 export default function DestinationResults() {
   const [destination, setDestination] = useState<Destination | null>(null);

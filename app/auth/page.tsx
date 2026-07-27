@@ -12,7 +12,7 @@ export default function AuthPage() {
       <div className="grid w-full max-w-400 items-start gap-8 md:gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(420px,520px)] lg:items-center">
         <div className="mx-auto max-w-2xl text-center lg:mx-0 lg:text-left">
           <p className="text-one-liner-medium text-secondary">
-            Welcome to Reisen
+            Welcome to Resisen
           </p>
           <h1 className="mt-4 text-[42px] leading-[0.96] font-bold font-display text-dark-base sm:text-hero">
             {isRegistering

@@ -12,7 +12,7 @@ import type {
   Itinerary,
   ItineraryCheckpoint,
   SavedItineraries,
-} from "@/lib/types/reisen";
+} from "@/lib/types/resisen";
 
 interface CurrentItineraryProps {
   currentItinerary: Itinerary;

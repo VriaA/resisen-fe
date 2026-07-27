@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { AlertTriangle } from "lucide-react";
 import { api, ApiRequestError } from "@/lib/api-client";
-import type { Provider } from "@/lib/types/reisen";
+import type { Provider } from "@/lib/types/resisen";
 import ProviderDashboard from "@/components/dashboard/ProviderDashboard";
 import ProviderApplicationForm from "@/components/dashboard/ProviderApplicationForm";
 
@@ -25,7 +25,7 @@ export default function ProviderDashboardPage() {
         setError(
           err instanceof ApiRequestError
             ? err.message
-            : "Failed to load provider data"
+            : "Failed to load provider data",
         );
       }
     } finally {
@@ -51,10 +51,7 @@ export default function ProviderDashboardPage() {
         <div className="max-w-md mx-auto text-center">
           <AlertTriangle size={28} className="text-error mx-auto mb-3" />
           <p className="text-body-regular text-body-dark mb-4">{error}</p>
-          <button
-            onClick={loadProvider}
-            className="primary-cta"
-          >
+          <button onClick={loadProvider} className="primary-cta">
             <span className="primary-cta-inner !py-2.5 !px-6 text-dark-base">
               Try again
             </span>
@@ -76,4 +73,3 @@ export default function ProviderDashboardPage() {
   // Application exists - show the dashboard
   return <ProviderDashboard />;
 }
- 

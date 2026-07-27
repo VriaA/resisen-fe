@@ -27,7 +27,7 @@ import type {
   Experience,
   PublicProvider,
   CreateBookingRequest,
-} from "@/lib/types/reisen";
+} from "@/lib/types/resisen";
 
 const MAPS_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_EMBED_KEY;
 const RELATED_LIMIT = 4;

@@ -6,7 +6,7 @@ import { PhoneInput, type CountryIso2 } from "react-international-phone";
 import "react-international-phone/style.css";
 import { authApi } from "@/lib/api-client";
 import { storeAuthSession } from "@/lib/auth-client";
-import type { UserRole } from "@/lib/types/reisen";
+import type { UserRole } from "@/lib/types/resisen";
 
 export type AuthMode = "login" | "register";
 
@@ -120,7 +120,7 @@ export default function AuthForm({ mode, onModeChange }: AuthFormProps) {
       }
 
       if (!role) {
-        nextErrors.role = "Choose how you want to use Reisen.";
+        nextErrors.role = "Choose how you want to use Resisen.";
       }
 
       // Validate provider fields
@@ -366,21 +366,21 @@ export default function AuthForm({ mode, onModeChange }: AuthFormProps) {
                   autoComplete: "tel",
                   "aria-invalid": Boolean(errors.phone),
                 }}
-                className={`reisen-phone-input ${errors.phone ? "reisen-phone-input-invalid" : ""}`}
-                inputClassName="reisen-phone-input-field"
+                className={`resisen-phone-input ${errors.phone ? "resisen-phone-input-invalid" : ""}`}
+                inputClassName="resisen-phone-input-field"
                 countrySelectorStyleProps={{
-                  buttonClassName: "reisen-phone-country-button",
+                  buttonClassName: "resisen-phone-country-button",
                   dropdownStyleProps: {
-                    className: "reisen-phone-country-dropdown",
-                    listItemClassName: "reisen-phone-country-option",
+                    className: "resisen-phone-country-dropdown",
+                    listItemClassName: "resisen-phone-country-option",
                     listItemSelectedClassName:
-                      "reisen-phone-country-option-selected",
+                      "resisen-phone-country-option-selected",
                     listItemFocusedClassName:
-                      "reisen-phone-country-option-focused",
-                    listItemCountryNameClassName: "reisen-phone-country-name",
-                    listItemDialCodeClassName: "reisen-phone-country-code",
+                      "resisen-phone-country-option-focused",
+                    listItemCountryNameClassName: "resisen-phone-country-name",
+                    listItemDialCodeClassName: "resisen-phone-country-code",
                     preferredListDividerClassName:
-                      "reisen-phone-country-divider",
+                      "resisen-phone-country-divider",
                   },
                 }}
               />
@@ -589,25 +589,25 @@ export default function AuthForm({ mode, onModeChange }: AuthFormProps) {
                         autoComplete: "tel",
                         "aria-invalid": Boolean(errors.companyPhone),
                       }}
-                      className={`reisen-phone-input ${
-                        errors.companyPhone ? "reisen-phone-input-invalid" : ""
+                      className={`resisen-phone-input ${
+                        errors.companyPhone ? "resisen-phone-input-invalid" : ""
                       }`}
-                      inputClassName="reisen-phone-input-field"
+                      inputClassName="resisen-phone-input-field"
                       countrySelectorStyleProps={{
-                        buttonClassName: "reisen-phone-country-button",
+                        buttonClassName: "resisen-phone-country-button",
                         dropdownStyleProps: {
-                          className: "reisen-phone-country-dropdown",
-                          listItemClassName: "reisen-phone-country-option",
+                          className: "resisen-phone-country-dropdown",
+                          listItemClassName: "resisen-phone-country-option",
                           listItemSelectedClassName:
-                            "reisen-phone-country-option-selected",
+                            "resisen-phone-country-option-selected",
                           listItemFocusedClassName:
-                            "reisen-phone-country-option-focused",
+                            "resisen-phone-country-option-focused",
                           listItemCountryNameClassName:
-                            "reisen-phone-country-name",
+                            "resisen-phone-country-name",
                           listItemDialCodeClassName:
-                            "reisen-phone-country-code",
+                            "resisen-phone-country-code",
                           preferredListDividerClassName:
-                            "reisen-phone-country-divider",
+                            "resisen-phone-country-divider",
                         },
                       }}
                     />

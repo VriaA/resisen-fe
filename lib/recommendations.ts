@@ -1,4 +1,4 @@
-import type { Experience } from "./types/reisen";
+import type { Experience } from "./types/resisen";
 
 /**
  * Hand-off for AI recommendations between the prompt page and the results page.
@@ -7,7 +7,7 @@ import type { Experience } from "./types/reisen";
  * destination never shows stale picks).
  */
 
-const STORAGE_KEY = "reisen:ai-recommendations";
+const STORAGE_KEY = "resisen:ai-recommendations";
 
 export type StoredRecommendations = {
   slug: string;

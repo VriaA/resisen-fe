@@ -1,15 +1,25 @@
 "use client";
 
 import { useState } from "react";
-import { Building2, MapPin, Mail, Phone, FileText, CheckCircle2, AlertTriangle } from "lucide-react";
+import {
+  Building2,
+  MapPin,
+  Mail,
+  Phone,
+  FileText,
+  CheckCircle2,
+  AlertTriangle,
+} from "lucide-react";
 import { api, ApiRequestError } from "@/lib/api-client";
-import type { CreateProviderApplicationRequest } from "@/lib/types/reisen";
+import type { CreateProviderApplicationRequest } from "@/lib/types/resisen";
 
 interface ProviderApplicationFormProps {
   onSuccess: () => void;
 }
 
-export default function ProviderApplicationForm({ onSuccess }: ProviderApplicationFormProps) {
+export default function ProviderApplicationForm({
+  onSuccess,
+}: ProviderApplicationFormProps) {
   const [form, setForm] = useState<CreateProviderApplicationRequest>({
     businessName: "",
     description: "",
@@ -27,7 +37,7 @@ export default function ProviderApplicationForm({ onSuccess }: ProviderApplicati
 
   function update<K extends keyof CreateProviderApplicationRequest>(
     key: K,
-    value: CreateProviderApplicationRequest[K]
+    value: CreateProviderApplicationRequest[K],
   ) {
     setForm((prev) => ({ ...prev, [key]: value }));
   }
@@ -53,7 +63,7 @@ export default function ProviderApplicationForm({ onSuccess }: ProviderApplicati
       setError(
         err instanceof ApiRequestError
           ? err.message
-          : "Failed to submit application. Please try again."
+          : "Failed to submit application. Please try again.",
       );
     } finally {
       setSubmitting(false);
@@ -68,8 +78,8 @@ export default function ProviderApplicationForm({ onSuccess }: ProviderApplicati
           Application Submitted!
         </h2>
         <p className="text-body-regular text-body-dark">
-          Your provider application has been submitted and is pending review by our team.
-          You'll be notified once it's approved.
+          Your provider application has been submitted and is pending review by
+          our team. You'll be notified once it's approved.
         </p>
       </div>
     );
@@ -82,15 +92,21 @@ export default function ProviderApplicationForm({ onSuccess }: ProviderApplicati
           Apply to become a Provider
         </h2>
         <p className="text-body-regular text-body-dark">
-          Complete your business details to start hosting experiences on Reisen.
+          Complete your business details to start hosting experiences on
+          Resisen.
         </p>
       </div>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <label className="flex flex-col gap-1.5">
-          <span className="text-small-medium text-dark-base">Business Name</span>
+          <span className="text-small-medium text-dark-base">
+            Business Name
+          </span>
           <div className="relative">
-            <Building2 size={18} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-body-dark" />
+            <Building2
+              size={18}
+              className="absolute left-3.5 top-1/2 -translate-y-1/2 text-body-dark"
+            />
             <input
               value={form.businessName}
               onChange={(e) => update("businessName", e.target.value)}
@@ -119,7 +135,10 @@ export default function ProviderApplicationForm({ onSuccess }: ProviderApplicati
           <label className="flex flex-col gap-1.5">
             <span className="text-small-medium text-dark-base">Location</span>
             <div className="relative">
-              <MapPin size={18} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-body-dark" />
+              <MapPin
+                size={18}
+                className="absolute left-3.5 top-1/2 -translate-y-1/2 text-body-dark"
+              />
               <input
                 value={form.location}
                 onChange={(e) => update("location", e.target.value)}
@@ -132,9 +151,14 @@ export default function ProviderApplicationForm({ onSuccess }: ProviderApplicati
           </label>
 
           <label className="flex flex-col gap-1.5">
-            <span className="text-small-medium text-dark-base">Company Phone</span>
+            <span className="text-small-medium text-dark-base">
+              Company Phone
+            </span>
             <div className="relative">
-              <Phone size={18} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-body-dark" />
+              <Phone
+                size={18}
+                className="absolute left-3.5 top-1/2 -translate-y-1/2 text-body-dark"
+              />
               <input
                 value={form.companyPhone}
                 onChange={(e) => update("companyPhone", e.target.value)}
@@ -148,7 +172,9 @@ export default function ProviderApplicationForm({ onSuccess }: ProviderApplicati
         </div>
 
         <label className="flex flex-col gap-1.5">
-          <span className="text-small-medium text-dark-base">Business Address</span>
+          <span className="text-small-medium text-dark-base">
+            Business Address
+          </span>
           <input
             value={form.businessAddress}
             onChange={(e) => update("businessAddress", e.target.value)}
@@ -161,9 +187,14 @@ export default function ProviderApplicationForm({ onSuccess }: ProviderApplicati
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <label className="flex flex-col gap-1.5">
-            <span className="text-small-medium text-dark-base">Company Email</span>
+            <span className="text-small-medium text-dark-base">
+              Company Email
+            </span>
             <div className="relative">
-              <Mail size={18} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-body-dark" />
+              <Mail
+                size={18}
+                className="absolute left-3.5 top-1/2 -translate-y-1/2 text-body-dark"
+              />
               <input
                 type="email"
                 value={form.companyEmail}
@@ -178,7 +209,10 @@ export default function ProviderApplicationForm({ onSuccess }: ProviderApplicati
           <label className="flex flex-col gap-1.5">
             <span className="text-small-medium text-dark-base">CAC Number</span>
             <div className="relative">
-              <FileText size={18} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-body-dark" />
+              <FileText
+                size={18}
+                className="absolute left-3.5 top-1/2 -translate-y-1/2 text-body-dark"
+              />
               <input
                 value={form.cacNumber}
                 onChange={(e) => update("cacNumber", e.target.value)}
@@ -192,7 +226,9 @@ export default function ProviderApplicationForm({ onSuccess }: ProviderApplicati
         </div>
 
         <label className="flex flex-col gap-1.5">
-          <span className="text-small-medium text-dark-base">CAC Document URL (Optional)</span>
+          <span className="text-small-medium text-dark-base">
+            CAC Document URL (Optional)
+          </span>
           <input
             type="url"
             value={form.cacDocumentUrl}
@@ -204,7 +240,10 @@ export default function ProviderApplicationForm({ onSuccess }: ProviderApplicati
 
         {error && (
           <div className="rounded-xl bg-error/10 border border-error/20 px-4 py-3 flex items-start gap-2">
-            <AlertTriangle size={18} className="text-error flex-shrink-0 mt-0.5" />
+            <AlertTriangle
+              size={18}
+              className="text-error flex-shrink-0 mt-0.5"
+            />
             <span className="text-small text-error">{error}</span>
           </div>
         )}

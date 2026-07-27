@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { experiencesApi, ApiRequestError } from "@/lib/api-client";
 import StateMessage from "./stateMessage";
-import type { Experience } from "@/lib/types/reisen";
+import type { Experience } from "@/lib/types/resisen";
 
 const FEATURED_LIMIT = 4;
 const PLACEHOLDER_IMAGE = "/experience_placeholder.jpg";

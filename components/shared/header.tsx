@@ -29,7 +29,7 @@ export default function Header() {
             <Image
               className="w-24 h-auto lg:w-28 flex-none"
               src="/logo.svg"
-              alt="Reisen Logo"
+              alt="Resisen Logo"
               height={32}
               width={113}
             />

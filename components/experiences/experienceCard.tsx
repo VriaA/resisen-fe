@@ -2,7 +2,7 @@ import Link from "next/link";
 import { MapPin, Compass, Sparkles, Clock, ImageIcon } from "lucide-react";
 import { formatPrice } from "@/lib/format";
 import SaveButton from "@/components/experiences/saveButton";
-import type { Experience } from "@/lib/types/reisen";
+import type { Experience } from "@/lib/types/resisen";
 
 export default function ExperienceCard({
   experience,

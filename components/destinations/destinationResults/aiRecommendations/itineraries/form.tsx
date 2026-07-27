@@ -9,7 +9,7 @@ import {
   SelectItem,
   SelectTrigger,
 } from "@/components/ui/select";
-import type { TripDurationUnit, TripDuration } from "@/lib/types/reisen";
+import type { TripDurationUnit, TripDuration } from "@/lib/types/resisen";
 
 const DURATION_UNITS = {
   hours: { label: "Hours", max: 24 },

@@ -1,6 +1,6 @@
 import { Sparkles } from "lucide-react";
 import ExperienceCard from "@/components/experiences/experienceCard";
-import type { Experience } from "@/lib/types/reisen";
+import type { Experience } from "@/lib/types/resisen";
 
 export default function RecommendedExperiences({
   recommended,

@@ -4,7 +4,7 @@ Browse verified experiences and destinations, get personalised recommendations a
 
 ![Resisen hero](public/resisen_hero.png)
 
-# Stack:
+## Stack:
 
 - Next.js 16 (App Router)
 - React 19
@@ -14,6 +14,8 @@ Browse verified experiences and destinations, get personalised recommendations a
 - Cloudinary
 
 Integrates with the [Resisen backend API](https://github.com/reisenVogueTour/backend).
+
+---
 
 ## Features
 
@@ -55,7 +57,7 @@ npm install
 # see Environment variables below
 ```
 
-# 3. Run the dev server
+### 3. Run the dev server
 
 ```bash
 npm run dev
@@ -73,5 +75,3 @@ The app runs at **http://localhost:3000** and expects the backend at the URL set
 | `NEXT_PUBLIC_GOOGLE_MAPS_EMBED_KEY` | No       | —                       | Enables the embedded map on experience/provider pages; leave blank to show a placeholder instead |
 
 All variables are public (`NEXT_PUBLIC_*`) — there are no server-only secrets in this app, since it calls the backend directly from the browser.
-
----
